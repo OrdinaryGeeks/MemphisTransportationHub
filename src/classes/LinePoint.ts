@@ -1,6 +1,6 @@
 interface LinePoint{
 
-    lat:string;
-    lng:string;
+    lat:number;
+    lng:number;
 }
 export default LinePoint;
