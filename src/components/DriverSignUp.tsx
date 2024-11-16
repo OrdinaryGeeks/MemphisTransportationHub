@@ -23,3 +23,4 @@ const DriverSignUp = () => {
 
     )
 }
+export default DriverSignUp
