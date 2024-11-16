@@ -1,4 +1,4 @@
-import Time from "./TIme";
+import Time from "./Time";
 
 interface DayAvailability{
 
