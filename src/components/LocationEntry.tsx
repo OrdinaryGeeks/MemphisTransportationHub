@@ -11,7 +11,7 @@ import { GoogleMap, LoadScript, MarkerF, Polyline, PolylineF } from "@react-goog
 
 
 
-function LocationEntry () {
+function LocationEntry (handleSubmit, register) {
 
 
     useEffect( () => {

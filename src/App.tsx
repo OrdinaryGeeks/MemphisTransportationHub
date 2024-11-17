@@ -1,6 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useForm } from 'react-hook-form';
+
 import './App.css'
 import {
   createBrowserRouter,
@@ -11,23 +10,33 @@ import LocationEntry from './components/LocationEntry'
 import DriverSignUp from './components/DriverSignUp'
 import RecieveCall from './components/RecieveCall'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RecieveCall/>
-  },
-  {
-    path: "/driver",
-    element: <DriverSignUp/>
-  },
-  {
-    path: "/map",
-    element: <LocationEntry/>,
-  },
-]);
+
 
 function App() {
  
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: { dayOfWeek: "Sunday" }
+  });
+
+  const onSubmit = (data) => {
+      console.log(data);
+      return 
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RecieveCall handleSubmit={handleSubmit(onSubmit)} register={register} watch={watch}/>
+    },
+    {
+      path: "/driver",
+      element: <DriverSignUp watch={watch}/>
+    },
+    {
+      path: "/map",
+      element: <LocationEntry watch={watch}/>,
+    },
+  ]);
 
   return (
     

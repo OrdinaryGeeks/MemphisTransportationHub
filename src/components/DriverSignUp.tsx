@@ -1,6 +1,6 @@
 
 
-const DriverSignUp = () => {
+const DriverSignUp = (handleSubmit, register) => {
 
 
 
