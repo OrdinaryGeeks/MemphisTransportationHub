@@ -59,7 +59,6 @@ const DailySchedulePickup = ({register, dayOfWeek, id, addresses, removeDailyPic
         }
     }
     return (<div style={{display: "block"}}>
-    <input type="button" onClick={removeDailyPickup(id)}>Delete</input>
     <select selected={options[0]} {...register(`${dayOfWeek}_pickup`)}>
         {options}
     </select>
@@ -75,55 +74,77 @@ const DailySchedulePickup = ({register, dayOfWeek, id, addresses, removeDailyPic
     <select selected={options[0]} {...register(`${dayOfWeek}_time`)}>
         {times}
     </select>
+    <input type="button" onClick={removeDailyPickup} data-id={id} value="Delete"/>
 </div>)
 }
 
 const DailySchedule = ({register, watch, addresses}) => {
     const dayOfWeek = watch("dayOfWeek")
-    let id = 0
-    let removed = 0
+    let [id, setId] = useState(-1)
+    let [remove, setRemove] = useState(-1)
     let [dailyPickups, setDailyPickups] = useState(new Map<number, JSX.Element>())
     let [dailyPickupList, setDailyPickupList] = useState<JSX.Element[]>([])
-    const removeDailyPickup = (id: number) => {
-        dailyPickups.delete(id)
-        removed = removed + 1
+    const removeDailyPickup = (event) => {
+        console.log("remove:", event.target.getAttribute("data-id"))
+        setRemove(event.target.getAttribute("data-id"))
     }
 
-    const addDailyPickup = () => {
-        dailyPickups.set(id, <DailySchedulePickup register={register} dayOfWeek={dayOfWeek} addresses={addresses} id={id} removeDailyPickup={removeDailyPickup}/>)
-        id = id + 1
+    const addDailyPickup = (event) => {
+        console.log("id:", id)
+        let next = id + 1
+        setId(next)
+        console.log("id:", next)
     }
     useEffect(() => {
-        setDailyPickups(dailyPickups)
-        let list: JSX.Element[] = [];
-        for(let i = 0; i < id; i = i + 1) {
-            let pickup = dailyPickups.get(i)
-            if (pickup !== undefined) {
-                list.push(pickup)
+        if (id != -1) {
+            dailyPickups.set(id, <DailySchedulePickup register={register} dayOfWeek={dayOfWeek} addresses={addresses} key={id} id={id} removeDailyPickup={removeDailyPickup}/>)
+            setDailyPickups(dailyPickups)
+            let list: JSX.Element[] = [];
+            for(let i = 0; i <= id; i = i + 1) {
+                let pickup = dailyPickups.get(i)
+                if (pickup !== undefined) {
+                    list.push(pickup)
+                }
             }
+            setDailyPickupList(list)
         }
-        setDailyPickupList(list)
-    }, [id, removed])
+    }, [id])
+
+    useEffect(() => {
+        if (remove != -1) {
+            dailyPickups.delete(Number(remove))
+            setDailyPickups(dailyPickups)
+            let list: JSX.Element[] = [];
+            for(let i = 0; i <= id; i = i + 1) {
+                let pickup = dailyPickups.get(i)
+                if (pickup !== undefined) {
+                    list.push(pickup)
+                }
+            }
+            setDailyPickupList(list)
+        }
+
+    }, [remove])
 
     return (
         <>
             <h2>{dayOfWeek} Schedule</h2>
-            <div id={dayOfWeek}>
-                <div style={{display: "block"}}>
-                    <div style={{display: "inline-block"}}>
-                        Pickup
-                    </div>
-                    <div style={{display: "inline-block"}}>
-                        Dropoff
-                    </div>
-                    <div style={{display: "inline-block"}}>
-                        Before/After
-                    </div>
-                    <div style={{display: "inline-block"}}>
-                        Time
-                    </div>
+            <div id={dayOfWeek} style={{display: "block"}}>
+                <div style={{display: "inline-block", padding: "2px 5px"}}>
+                    Pickup
+                </div>
+                <div style={{display: "inline-block", padding: "2px 5px"}}>
+                    Dropoff
+                </div>
+                <div style={{display: "inline-block", padding: "2px 5px"}}>
+                    Before/After
+                </div>
+                <div style={{display: "inline-block", padding: "2px 5px"}}>
+                    Time
                 </div>
             </div>
+            {dailyPickupList}
+            <input type="button" onClick={addDailyPickup} value="Add Entry"/>
 
         </>
     )
@@ -140,14 +161,16 @@ const Schedule = ({register, watch, addresses}) => {
 
     return (
         <>
-            <h2>Schedule</h2>   
-            <label>
-                Day of Week:
-                <select {...register("dayOfWeek")}>
-                    {options}
-                </select>
-                <DailySchedule register={register} watch={watch} addresses={addresses}/>
-            </label>
+            <h2>Schedule</h2> 
+            <div>
+                <label>
+                    Day of Week:
+                    <select {...register("dayOfWeek")}>
+                        {options}
+                    </select>
+                </label>
+            </div>  
+            <DailySchedule register={register} watch={watch} addresses={addresses}/>
         </>
     )
 }

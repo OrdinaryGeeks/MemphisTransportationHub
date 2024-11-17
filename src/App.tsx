@@ -20,6 +20,7 @@ function App() {
 
   const onSubmit = (data) => {
       console.log(data);
+      window.location.href = "/map"
       return 
   }
 
