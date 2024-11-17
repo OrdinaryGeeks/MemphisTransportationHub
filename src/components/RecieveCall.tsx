@@ -85,15 +85,12 @@ const DailySchedule = ({register, watch, addresses}) => {
     let [dailyPickups, setDailyPickups] = useState(new Map<number, JSX.Element>())
     let [dailyPickupList, setDailyPickupList] = useState<JSX.Element[]>([])
     const removeDailyPickup = (event) => {
-        console.log("remove:", event.target.getAttribute("data-id"))
         setRemove(event.target.getAttribute("data-id"))
     }
 
     const addDailyPickup = (event) => {
-        console.log("id:", id)
         let next = id + 1
         setId(next)
-        console.log("id:", next)
     }
     useEffect(() => {
         if (id != -1) {
