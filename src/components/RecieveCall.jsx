@@ -82,8 +82,8 @@ const DailySchedule = ({register, watch, addresses}) => {
     const dayOfWeek = watch("dayOfWeek")
     let [id, setId] = useState(-1)
     let [remove, setRemove] = useState(-1)
-    let [dailyPickups, setDailyPickups] = useState(new Map<number, JSX.Element>())
-    let [dailyPickupList, setDailyPickupList] = useState<JSX.Element[]>([])
+    let [dailyPickups, setDailyPickups] = useState(new Map())
+    let [dailyPickupList, setDailyPickupList] = useState([])
     const removeDailyPickup = (event) => {
         setRemove(event.target.getAttribute("data-id"))
     }
@@ -96,7 +96,7 @@ const DailySchedule = ({register, watch, addresses}) => {
         if (id != -1) {
             dailyPickups.set(id, <DailySchedulePickup register={register} dayOfWeek={dayOfWeek} addresses={addresses} key={id} id={id} removeDailyPickup={removeDailyPickup}/>)
             setDailyPickups(dailyPickups)
-            let list: JSX.Element[] = [];
+            let list = [];
             for(let i = 0; i <= id; i = i + 1) {
                 let pickup = dailyPickups.get(i)
                 if (pickup !== undefined) {
@@ -111,7 +111,7 @@ const DailySchedule = ({register, watch, addresses}) => {
         if (remove != -1) {
             dailyPickups.delete(Number(remove))
             setDailyPickups(dailyPickups)
-            let list: JSX.Element[] = [];
+            let list = [];
             for(let i = 0; i <= id; i = i + 1) {
                 let pickup = dailyPickups.get(i)
                 if (pickup !== undefined) {

@@ -30,10 +30,6 @@ function App() {
       element: <RecieveCall handleSubmit={handleSubmit(onSubmit)} register={register} watch={watch}/>
     },
     {
-      path: "/driver",
-      element: <DriverSignUp watch={watch}/>
-    },
-    {
       path: "/map",
       element: <LocationEntry watch={watch}/>,
     },

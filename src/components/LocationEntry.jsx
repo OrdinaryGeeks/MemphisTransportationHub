@@ -1,9 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Papa from 'papaparse';
-import fs from 'fs';
-import BusStop from "../classes/BusStop";
-
-import Route from "../classes/Route";
 import { GoogleMap, LoadScript, MarkerF, Polyline, PolylineF } from "@react-google-maps/api";
 
 
@@ -32,13 +27,13 @@ function LocationEntry (handleSubmit, register) {
       // ...
     
 
-    const [busStops, setBusStops] = useState<BusStop[]>([{
+    const [busStops, setBusStops] = useState([{
         stopName: "",
         longitude: 0,
         latitude:  0
 }]);
 const [mapLoaded, setMapLoaded] = useState(false);
-const [busRoutes, setBusRoutes] = useState<Route[]>([{routeName:"",shapeId:"", linePoints:[{lat:0, lng:0}] }]);
+const [busRoutes, setBusRoutes] = useState([{routeName:"",shapeId:"", linePoints:[{lat:0, lng:0}] }]);
 
 const [closestName, setClosestName] = useState("");
 
@@ -62,7 +57,7 @@ const busLong2= 20.0;
 
 
 
-function getDistanceFromLatLonInKm(lat1:number,lon1:number,lat2:number,lon2:number) {
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2-lat1);  // deg2rad below
     var dLon = deg2rad(lon2-lon1); 
@@ -76,7 +71,7 @@ function getDistanceFromLatLonInKm(lat1:number,lon1:number,lat2:number,lon2:numb
     return d;
   }
   
-  function deg2rad(deg : number) {
+  function deg2rad(deg) {
     return deg * (Math.PI/180)
   }
 const readInBusStops = () => {
