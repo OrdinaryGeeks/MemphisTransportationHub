@@ -1,23 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useForm } from 'react-hook-form';
+
 import './App.css'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom"
 
 import LocationEntry from './components/LocationEntry'
-import RequestPickup from './components/RequestPickup'
+import DriverSignUp from './components/DriverSignUp'
+import RecieveCall from './components/RecieveCall'
+
+
 
 function App() {
  
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: { dayOfWeek: "Sunday" }
+  });
+
+  const onSubmit = (data) => {
+      console.log(data);
+      return 
+  }
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <RecieveCall handleSubmit={handleSubmit(onSubmit)} register={register} watch={watch}/>
+    },
+    {
+      path: "/driver",
+      element: <DriverSignUp watch={watch}/>
+    },
+    {
+      path: "/map",
+      element: <LocationEntry watch={watch}/>,
+    },
+  ]);
 
   return (
     
-   <>
-      <LocationEntry/>
-
+    <RouterProvider router={router} />
 
 <RequestPickup/>
 
-      </>
 
       
     

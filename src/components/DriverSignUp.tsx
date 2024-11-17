@@ -1,6 +1,6 @@
 
 
-const DriverSignUp = () => {
+const DriverSignUp = (handleSubmit, register) => {
 
 
 
@@ -23,3 +23,4 @@ const DriverSignUp = () => {
 
     )
 }
+export default DriverSignUp

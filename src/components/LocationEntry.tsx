@@ -12,7 +12,7 @@ import PickupRequest from "../classes/PickupRequest";
 
 
 
-function LocationEntry () {
+function LocationEntry (handleSubmit, register) {
 
 
     useEffect( () => {
@@ -3928,7 +3928,7 @@ const options = {
     return(
 <div>
 
-<LoadScript googleMapsApiKey='AIzaSyBn03P0jUKjZXVGoYro95HBRWITYq7OXyI'>
+<LoadScript googleMapsApiKey='AIzaSyDacT80vYVqEkKzt9BD_rpfA6kLffiG40Q'>
     
 {mapLoaded ? (<GoogleMap
         mapContainerStyle={{ height: '400px', width: '800px' }}
