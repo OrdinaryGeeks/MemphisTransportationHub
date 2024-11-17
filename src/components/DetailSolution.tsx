@@ -1,0 +1,18 @@
+
+
+
+function DetailSolution(){
+
+
+
+
+
+
+
+    return(
+
+<></>
+
+        
+    )
+}
