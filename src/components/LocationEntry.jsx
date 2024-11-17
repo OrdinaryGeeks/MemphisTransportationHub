@@ -42,7 +42,7 @@ const [data, setData] = useState([]);
 const [latitude, setLatitude] = useState(0.0);
 const [longitude, setLongitude] = useState(0.0);
 
-const [chosenRoute, setChosenRoute] = useState<Route>({shapeId:"", linePoints:[{lat:30, lng:30}], routeName:""});
+const [chosenRoute, setChosenRoute] = useState({shapeId:"", linePoints:[{lat:30, lng:30}], routeName:""});
 
 const [latitude2, setLatitude2] = useState(0.0);
 const [longitude2, setLongitude2] = useState(0.0);
@@ -3850,20 +3850,8 @@ setChosenRoute(busRoutes[0]);
 setCenter({lat:35.064738000000034, lng:-90.05762799999997});
 setMapLoaded(true);
    
-console.log(busRoutes[0].linePoints[0]);
 }
 
-
-
-
-    const   ClosestBus = () => {
-
-    
-    
-
-
-
-    }
 
     
     const mapRef = useRef(null);
@@ -3876,7 +3864,6 @@ console.log(busRoutes[0].linePoints[0]);
         {
 
             let thisDist = getDistanceFromLatLonInKm(latitude, longitude, busStops[i].latitude, busStops[i].longitude);
-            console.log(thisDist);
             if(thisDist < minDist)
             {
                 minDist = thisDist;
@@ -3921,7 +3908,6 @@ const options = {
   
   //const center = { lat: 35.080481, lng: -89.972287};
   
-  console.log(busRoutes[0].linePoints);
     return(
 <div>
 
