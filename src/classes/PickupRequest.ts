@@ -3,8 +3,10 @@
 
 interface PickupRequest{
 
-latitude: number;
-longitude: number;
-time: Date;
+lat: number;
+lng: number;
+
+name: string;
 
 }
+export default  PickupRequest;

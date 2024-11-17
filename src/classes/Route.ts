@@ -4,7 +4,8 @@ interface Route{
 
  routeName:string;
  shapeId:string;
- linePoints: LinePoint[];   
+ linePoints: LinePoint[]; 
+ latLngs: LinePoint[]  
 }
 
 export default Route;

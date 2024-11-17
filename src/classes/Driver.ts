@@ -1,4 +1,4 @@
-import DayAvailability from "../classes/DayAvailability";
+import DayAvailability from "./DayAvailability";
 
 
 interface Driver{
